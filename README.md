@@ -6,10 +6,6 @@ This project intends to be a simple boilerplate for api development using [Expre
 
 Please see the [package.json](package.json) file.
 
-## Documentation
-
-Please see the [docs](docs) folder (soon).
-
 ## Installation
 
 Clone the repository and install the dependencies:
@@ -19,6 +15,10 @@ $ git clone https://github.com/bahirul/bwx.git
 $ cd bwx
 $ npm install
 ```
+
+## Documentation
+
+Please see the [docs](docs) folder (soon).
 
 ## License
 
