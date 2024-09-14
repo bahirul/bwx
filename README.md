@@ -6,14 +6,12 @@ This project intends to be a simple boilerplate for api development using [Expre
 
 Please see the [package.json](package.json) file.
 
-## Installation
+## Creating a new project
 
-Clone the repository and install the dependencies:
+Create a new project using the following command:
 
 ```bash
-$ git clone https://github.com/bahirul/bwx.git
-$ cd bwx
-$ npm install
+$ npx create-bwx my-app
 ```
 
 ## Documentation
