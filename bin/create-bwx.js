@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import process from "process";
 import Path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
