@@ -116,5 +116,5 @@ const excludeDevDependencies = [];
         stdio: 'inherit',
     });
 
-    console.log(chalk.green(`\nSuccess!`, `Created ${projectName} at ${destination}`));
+    console.log(chalk.green(`\nSuccess!`), `Created ${projectName} at ${destination}`);
 })();
