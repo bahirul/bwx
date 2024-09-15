@@ -1,5 +1,10 @@
 import path from "path";
 
+/**
+ * PathMapper class to resolve paths with aliases
+ * 
+ * @class PathMapper
+ */
 export class PathMapper {
     private static aliases: { [key: string]: string } = {
         '@root': path.resolve(__dirname, '../../'),
