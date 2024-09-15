@@ -1,5 +1,5 @@
 /**
  * entry point of the application
  */
-import app from "./src/core/app";
+import app from "./core/app";
 app.start();

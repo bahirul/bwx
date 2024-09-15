@@ -1,6 +1,6 @@
 # bwx
 
-This project intends to be a simple boilerplate for api development using [Express](https://expressjs.com/).
+Simple boilerplate for api development using [Express](https://expressjs.com/).
 
 ## Dependencies packages
 

@@ -2,7 +2,7 @@
   "name": "bwx",
   "version": "1.0.0-beta.6",
   "scripts": {
-    "dev": "nodemon server.ts",
+    "dev": "nodemon src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -17,7 +17,7 @@
   ],
   "author": "Bahirul Rizki Ariyanto <rizki.device@gmail.com>",
   "license": "ISC",
-  "description": "simple boilerplate for api development with express",
+  "description": "Simple boilerplate for api development using express",
   "dependencies": {
     "body-parser": "^1.20.3",
     "chalk": "^5.3.0",
