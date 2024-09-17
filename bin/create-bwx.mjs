@@ -57,18 +57,20 @@ const excludeDevDependencies = [];
     // copy files
     fs.copySync(source, destination, {
         filter: (src) => {
-            const relativePath = Path.relative(source, src);
-            if (ignoreFiles.includes(relativePath)) {
-                return false;
-            }
-            return true;
+            const filename = Path.basename(src);
+            return !ignoreFiles.includes(filename);
         }
     });
 
     // rename src/config/example.main.ts to src/config/main.ts
     const exampleMainPath = makePath(destination, 'src', 'config', 'example.main.ts');
     const mainPath = makePath(destination, 'src', 'config', 'main.ts');
-    fs.moveSync(exampleMainPath, mainPath);
+
+    if (!fs.existsSync(mainPath)) {
+        fs.moveSync(exampleMainPath, mainPath);
+    } else {
+        fs.removeSync(exampleMainPath);
+    }
 
     // edit package.json
     const pkgPath = makePath(destination, 'package.json');

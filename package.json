@@ -1,6 +1,6 @@
 {
   "name": "bwx",
-  "version": "1.0.0-beta.8",
+  "version": "1.0.0-beta.9",
   "scripts": {
     "dev": "nodemon src/server.ts",
     "build": "tsc",
