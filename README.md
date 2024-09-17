@@ -20,4 +20,4 @@ Please see the [docs](docs) folder (soon).
 
 ## License
 
-[MIT](LICENSE)
+[ISC](LICENSE)
