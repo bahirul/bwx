@@ -1,6 +1,6 @@
 {
   "name": "bwx",
-  "version": "1.0.0-beta.7",
+  "version": "1.0.0-beta.8",
   "scripts": {
     "dev": "nodemon src/server.ts",
     "build": "tsc",
@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "create-bwx": "bin/create-bwx.js"
+    "create-bwx": "bin/create-bwx.mjs"
   },
   "keywords": [
     "node",
