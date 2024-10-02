@@ -11,7 +11,7 @@ Please see the [package.json](package.json) file.
 Create a new project using the following command:
 
 ```bash
-$ npx bwx my-app
+npx bwx my-app
 ```
 
 ## Documentation
