@@ -10,14 +10,17 @@ import { execSync } from "child_process";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const ignoreFiles = [
-    '.git',
-    'bin',
-    'logs',
-    'node_modules',
-    'dist',
     'package-lock.json',
     'README.md',
     'LICENSE',
+];
+
+const ignoreDirs = [
+    '.git',
+    'dist',
+    'bin',
+    'logs',
+    'node_modules',
 ];
 
 const excludePkgKeys = [
@@ -57,8 +60,11 @@ const excludeDevDependencies = [];
     // copy files
     fs.copySync(source, destination, {
         filter: (src) => {
-            const filename = Path.basename(src);
-            return !ignoreFiles.includes(filename);
+            if (fs.lstatSync(src).isDirectory()) {
+                return !ignoreDirs.includes(src);
+            }
+
+            return !ignoreFiles.includes(src);
         }
     });
 
