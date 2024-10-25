@@ -62,10 +62,10 @@ const excludeDevDependencies = [];
         filter: (src) => {
             const basePathname = Path.basename(src);
             if (fs.lstatSync(src).isDirectory()) {
-                return ignoreDirs.includes(basePathname);
+                return !ignoreDirs.includes(basePathname);
             }
 
-            return ignoreFiles.includes(basePathname);
+            return !ignoreFiles.includes(basePathname);
         }
     });
 
