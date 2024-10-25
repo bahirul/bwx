@@ -62,6 +62,13 @@ const excludeDevDependencies = [];
         }
     });
 
+    // remove .git folder
+    const gitPath = makePath(destination, '.git');
+
+    if (fs.existsSync(gitPath)) {
+        fs.removeSync(gitPath);
+    }
+
     // edit package.json
     const pkgPath = makePath(destination, 'package.json');
     const pkg = await fs.readJson(pkgPath);
