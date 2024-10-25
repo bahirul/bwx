@@ -67,7 +67,7 @@ const excludeDevDependencies = [];
     if (fs.existsSync(gitignorePath)) {
         fs.copySync(gitignorePath, destination);
     } else {
-        console.warn('.gitignore file does not exist in the source directory.');
+        console.warn(chalk.yellow('.gitignore file does not exist in the source directory.'));
     }
 
     // edit package.json
