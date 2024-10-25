@@ -63,7 +63,12 @@ const excludeDevDependencies = [];
     });
 
     // copy .gitignore
-    fs.copySync(`${source}/.gitignore`, destination);
+    const gitignorePath = makePath(source, '.gitignore');
+    if (fs.existsSync(gitignorePath)) {
+        fs.copySync(gitignorePath, destination);
+    } else {
+        console.warn('.gitignore file does not exist in the source directory.');
+    }
 
     // edit package.json
     const pkgPath = makePath(destination, 'package.json');
