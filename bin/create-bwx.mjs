@@ -62,16 +62,6 @@ const excludeDevDependencies = [];
         }
     });
 
-    // rename src/config/example.main.ts to src/config/main.ts
-    const exampleMainPath = makePath(destination, 'src', 'config', 'example.main.ts');
-    const mainPath = makePath(destination, 'src', 'config', 'main.ts');
-
-    if (!fs.existsSync(mainPath)) {
-        fs.moveSync(exampleMainPath, mainPath);
-    } else {
-        fs.removeSync(exampleMainPath);
-    }
-
     // edit package.json
     const pkgPath = makePath(destination, 'package.json');
     const pkg = await fs.readJson(pkgPath);
