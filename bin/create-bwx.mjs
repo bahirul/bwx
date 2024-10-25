@@ -73,61 +73,55 @@ const excludeDevDependencies = [];
     await fs.writeFile(gitignorePath, `${gitignoreContent}\n\n# src/config/main.ts\n./src/config/main.ts\n`);
 
     // edit package.json
-    const pkgGithub = await fetch('https://raw.githubusercontent.com/bahirul/bwx/refs/heads/main/package.json');
+    const pkgPath = makePath(destination, 'package.json');
+    const pkg = await fs.readJson(pkgPath);
 
-    if (pkgGithub.ok) {
-        const pkgPath = makePath(destination, 'package.json');
-        const pkg = await pkgGithub.json();
+    pkg.name = projectName;
+    pkg.version = '1.0.0';
+    pkg.description = '';
+    pkg.author = '';
 
-        pkg.name = projectName;
-        pkg.version = '1.0.0';
-        pkg.description = '';
-        pkg.author = '';
+    // exclude keys
+    excludePkgKeys.forEach(key => {
+        delete pkg[key];
+    });
 
-        // exclude keys
-        excludePkgKeys.forEach(key => {
-            delete pkg[key];
-        });
+    // exclude dependencies
+    excludeDependencies.forEach(dep => {
+        delete pkg.dependencies[dep];
+    });
 
-        // exclude dependencies
-        excludeDependencies.forEach(dep => {
-            delete pkg.dependencies[dep];
-        });
+    // exclude devDependencies
+    excludeDevDependencies.forEach(dep => {
+        delete pkg.devDependencies[dep];
+    });
 
-        // exclude devDependencies
-        excludeDevDependencies.forEach(dep => {
-            delete pkg.devDependencies[dep];
-        });
+    // write package.json
+    await fs.writeJson(pkgPath, pkg, { spaces: 2 });
 
-        // write package.json
-        await fs.writeJson(pkgPath, pkg, { spaces: 2 });
+    console.log('');
 
-        console.log('');
+    // install dependencies
+    console.log(`Installing dependencies:`);
+    Object.keys(pkg.dependencies).forEach(dep => {
+        console.log('-', chalk.cyan(dep));
+    });
 
-        // install dependencies
-        console.log(`Installing dependencies:`);
-        Object.keys(pkg.dependencies).forEach(dep => {
-            console.log('-', chalk.cyan(dep));
-        });
+    console.log('');
 
-        console.log('');
+    // install devDependencies
+    console.log(`Installing devDependencies:`);
+    Object.keys(pkg.devDependencies).forEach(dep => {
+        console.log('-', chalk.cyan(dep));
+    });
 
-        // install devDependencies
-        console.log(`Installing devDependencies:`);
-        Object.keys(pkg.devDependencies).forEach(dep => {
-            console.log('-', chalk.cyan(dep));
-        });
+    console.log('');
 
-        console.log('');
+    // run npm install
+    execSync('npm install', {
+        cwd: destination,
+        stdio: 'inherit',
+    });
 
-        // run npm install
-        execSync('npm install', {
-            cwd: destination,
-            stdio: 'inherit',
-        });
-
-        console.log(chalk.green(`\nSuccess!`), `Created ${projectName} at ${destination}`);
-    } else {
-        console.log(chalk.red('Error installing dependencies: failed to create package.json'));
-    }
+    console.log(chalk.green(`\nSuccess!`), `Created ${projectName} at ${destination}`);
 })();
