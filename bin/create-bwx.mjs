@@ -9,13 +9,10 @@ import { execSync } from "child_process";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const ignoreFiles = [
+const ignoreLists = [
     'package-lock.json',
     'README.md',
     'LICENSE',
-];
-
-const ignoreDirs = [
     '.git',
     'dist',
     'bin',
@@ -45,7 +42,6 @@ const excludeDevDependencies = [];
     }
 
     const projectName = argv[0];
-
     const source = makePath(__dirname, '..');
     const destination = makePath(process.cwd(), projectName);
 
@@ -59,15 +55,21 @@ const excludeDevDependencies = [];
 
     // copy files
     fs.copySync(source, destination, {
-        filter: (src) => {
-            const basePathname = Path.basename(src);
-            if (fs.lstatSync(src).isDirectory()) {
-                return !ignoreDirs.includes(basePathname);
-            }
-
-            return !ignoreFiles.includes(basePathname);
+        filter: (f) => {
+            return !ignoreLists.includes(f);
         }
     });
+
+    // create .gitignore
+    const gitignoreNodeGithub = await fetch('https://raw.githubusercontent.com/github/gitignore/refs/heads/main/Node.gitignore');
+    let gitignoreContent = '';
+
+    if (gitignoreNodeGithub.ok) {
+        gitignoreContent = await gitignoreNodeGithub.text();
+    }
+
+    const gitignorePath = makePath(destination, '.gitignore');
+    await fs.writeFile(gitignorePath, `${gitignoreContent}}\n\n# src/config/main.ts\n./src/config/main.ts\n`);
 
     // edit package.json
     const pkgPath = makePath(destination, 'package.json');
