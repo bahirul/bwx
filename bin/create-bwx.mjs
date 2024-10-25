@@ -62,6 +62,9 @@ const excludeDevDependencies = [];
         }
     });
 
+    // copy .gitignore
+    fs.copySync(`${source}/.gitignore`, destination);
+
     // edit package.json
     const pkgPath = makePath(destination, 'package.json');
     const pkg = await fs.readJson(pkgPath);
