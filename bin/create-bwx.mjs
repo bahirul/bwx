@@ -63,9 +63,9 @@ const excludeDevDependencies = [];
     });
 
     // remove .git folder
-    const gitPath = makePath(destination, '.git');
+    const gitPath = `${destination}/.git`;
 
-    if (fs.pathExistsSync(gitPath)) {
+    if (fs.existsSync(gitPath)) {
         fs.removeSync(gitPath);
     }
 
