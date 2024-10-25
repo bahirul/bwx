@@ -69,7 +69,7 @@ const excludeDevDependencies = [];
     }
 
     const gitignorePath = makePath(destination, '.gitignore');
-    await fs.writeFile(gitignorePath, `${gitignoreContent}}\n\n# src/config/main.ts\n./src/config/main.ts\n`);
+    await fs.writeFile(gitignorePath, `${gitignoreContent}\n\n# src/config/main.ts\n./src/config/main.ts\n`);
 
     // edit package.json
     const pkgPath = makePath(destination, 'package.json');
