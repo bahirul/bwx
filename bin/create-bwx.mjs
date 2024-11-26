@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-import process from "process";
-import Path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import fs from 'fs-extra';
 import chalk from "chalk";
 import { execSync } from "child_process";
+import fs from 'fs-extra';
+import Path, { dirname } from 'path';
+import process from "process";
+import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -27,6 +27,7 @@ const excludePkgKeys = [
 
 const excludeDependencies = [
     'fs-extra',
+    'chalk',
 ];
 
 const excludeDevDependencies = [];
