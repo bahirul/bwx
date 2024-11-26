@@ -1,9 +1,15 @@
-import winston from "winston";
-import config from "../config/main";
-import { PathMapper } from "../helpers/path-mapper";
+/**
+ * Logger for the application
+ */
+import winston from 'winston';
+import appConfig from '../config/app';
+import { getAlias } from './path-alias';
 
 const { combine, timestamp, printf } = winston.format;
 
+const timestampFormat = 'DD/MMM/YYYY HH:mm:ss';
+
+// Winston colorize
 winston.addColors({
     error: 'red',
     warn: 'yellow',
@@ -11,31 +17,33 @@ winston.addColors({
     http: 'magenta',
     verbose: 'cyan',
     debug: 'blue',
-    silly: 'white'
+    silly: 'white',
 });
 
-const logger = winston.createLogger({
-    level: config.winston.level,
+export const logger = winston.createLogger({
+    level: appConfig.log.level,
     format: combine(
-        timestamp(),
         winston.format.colorize(),
-        printf(({ level, message, timestamp }) => {
-            return `${timestamp} [${level}]: ${message}`;
+        timestamp({ format: timestampFormat }),
+        printf(({ timestamp, level, message }) => {
+            return `${timestamp} [${level}] ${message}`;
         }),
     ),
     transports: [
+        new winston.transports.File({
+            filename: getAlias('@logs/error.log'),
+            level: 'error',
+        }),
+        new winston.transports.File({
+            filename: getAlias('@logs/combined.log'),
+        }),
         new winston.transports.Console({
             format: combine(
-                timestamp(),
-                winston.format.colorize(),
-                printf(({ level, message, timestamp }) => {
-                    return `${timestamp} [${level}]: ${message}`;
+                timestamp({ format: timestampFormat }),
+                printf(({ timestamp, level, message }) => {
+                    return `${timestamp} [${level}] ${message}`;
                 }),
-            )
+            ),
         }),
-        new winston.transports.File({ filename: PathMapper.resolve("@logs/error.log"), level: "error" }),
-        new winston.transports.File({ filename: PathMapper.resolve("@logs/combined.log") }),
-    ]
+    ],
 });
-
-export default logger;

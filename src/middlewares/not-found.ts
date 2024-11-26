@@ -1,11 +1,13 @@
-import { Request, Response } from "express";
-import Jsend from "../helpers/jsend";
+/**
+ * Middleware to handle 404 error
+ */
+import { NextFunction, Request, Response } from 'express';
+import { jsendFail } from '../utils/jsend';
 
-const notFoundMiddleware = (req: Request, res: Response) => {
-    return res.status(404).send(Jsend.error({
-        message: "resource not found",
-        code: 404
-    }));
-};
-
-export default notFoundMiddleware;
+export default function notFoundMiddleware(
+    _req: Request,
+    res: Response,
+    _next: NextFunction,
+) {
+    res.status(404).json(jsendFail('resource not found'));
+}
