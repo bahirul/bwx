@@ -1,5 +1,5 @@
 import cors from 'cors';
-import express, { NextFunction, Request, Response } from 'express';
+import express, { Request, Response } from 'express';
 import helmet from 'helmet';
 import appConfig from './config/app';
 import httpLoggerMiddleware from './middlewares/http-logger';
@@ -29,7 +29,7 @@ app.use('/', mainRoutes);
 app.use(notFoundMiddleware);
 
 // error handler
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, req: Request, res: Response) => {
     logger.error({
         action: 'errorHandler',
         message: (err as Error)?.message,

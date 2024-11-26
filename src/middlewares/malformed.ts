@@ -2,7 +2,6 @@
  * This middleware is used to catch malformed request errors like invalid JSON body request.
  */
 import { NextFunction, Request, Response } from 'express';
-import appConfig from '../config/app';
 import { jsendFail } from '../utils/jsend';
 
 interface MalformedError extends Error {
@@ -21,14 +20,6 @@ export default function malformedMiddleware(
 ): void {
     // catch 400 error code
     if (err.statusCode === 400) {
-        const data =
-            appConfig.log.level === 'development'
-                ? {
-                      error: err.name,
-                      stack: err.stack ? err.stack.split('\n') : [],
-                  }
-                : {};
-
         res.status(400).send(jsendFail('malformed request'));
     }
 

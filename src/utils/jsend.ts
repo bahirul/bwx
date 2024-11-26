@@ -3,42 +3,42 @@
  *
  * @see https://github.com/omniti-labs/jsend
  */
-interface JSendSuccessResponse {
+interface JSendSuccessResponse<T> {
     status: 'success';
-    data: any;
+    data: T;
 }
 
-interface JSendFailResponse {
+interface JSendFailResponse<T> {
     status: 'fail';
-    data: any;
+    data: T;
 }
 
-interface JSendErrorResponse {
+interface JSendErrorResponse<T> {
     status: 'error';
     message: string;
     code?: number | null;
-    data?: any;
+    data?: T | null;
 }
 
-export const jsendSuccess = (data: any): JSendSuccessResponse => {
+export const jsendSuccess = <T>(data: T): JSendSuccessResponse<T> => {
     return {
         status: 'success',
         data,
     };
 };
 
-export const jsendFail = (data: any): JSendFailResponse => {
+export const jsendFail = <T>(data: T): JSendFailResponse<T> => {
     return {
         status: 'fail',
         data,
     };
 };
 
-export const jsendError = (
+export const jsendError = <T>(
     message: string,
-    data?: any,
+    data?: T,
     code?: number,
-): JSendErrorResponse => {
+): JSendErrorResponse<T> => {
     return {
         status: 'error',
         message,
