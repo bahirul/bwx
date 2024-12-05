@@ -2,7 +2,7 @@
  * This middleware is used to catch malformed request errors like invalid JSON body request.
  */
 import { NextFunction, Request, Response } from 'express';
-import { jsendFail } from '../utils/jsend';
+import { jsendFail } from '../../utils/jsend';
 
 interface MalformedError extends Error {
     expose: boolean;

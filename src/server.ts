@@ -1,10 +1,10 @@
 import cors from 'cors';
 import express, { Request, Response } from 'express';
 import helmet from 'helmet';
+import httpLoggerMiddleware from './app/middlewares/http-logger';
+import notFoundMiddleware from './app/middlewares/not-found';
+import mainRoutes from './app/modules/main/main-routes';
 import appConfig from './config/app';
-import httpLoggerMiddleware from './middlewares/http-logger';
-import notFoundMiddleware from './middlewares/not-found';
-import mainRoutes from './modules/main/main-routes';
 import { logger } from './utils/logger';
 
 // create express app

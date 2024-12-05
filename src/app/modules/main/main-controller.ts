@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { jsendSuccess } from '../../utils/jsend';
+import { jsendSuccess } from '../../../utils/jsend';
 
 // GET /
 export const getMainAction = async (req: Request, res: Response) => {
