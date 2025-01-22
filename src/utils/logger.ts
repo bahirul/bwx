@@ -35,7 +35,7 @@ export const logger = winston.createLogger({
             level: 'error',
         }),
         new winston.transports.File({
-            filename: getAlias('@logs/combined.log'),
+            filename: getAlias('@logs/app.log'),
         }),
         new winston.transports.Console({
             format: combine(
