@@ -1,6 +1,6 @@
 {
   "name": "bwx",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "scripts": {
     "start": "node ./dist/server.js",
     "dev": "nodemon ./src/server.ts",

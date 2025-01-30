@@ -8,7 +8,7 @@ const httpLoggerMiddleware = morgan(
     ':status :method - :url - :remote-addr - :response-time ms',
     {
         stream: {
-            write: (message: string) => logger.http(`🌏 ${message.trim()}`),
+            write: (message: string) => logger.info(`🌏 ${message.trim()}`),
         },
     },
 );
